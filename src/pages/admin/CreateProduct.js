@@ -8,7 +8,8 @@ import { Button, InputForm, Loading, SelectForm } from "../../components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiCreateProduct } from "../../api";
-import ClassicEditor from "../../ckeditor/build/ckeditor";
+// import ClassicEditor from "../../ckeditor/build/ckeditor";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { closeModal, showModal } from "../../store/app/appSlice";
 import { fileToBase64 } from "../../utils/helpers";
 
