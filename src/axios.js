@@ -2,7 +2,8 @@ import axios from "axios";
 import { apiRefreshToken } from "./api";
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL: process.env.REACT_APP_API_URL,
+  baseURL:"https://digital-mern-stacks-api.onrender.com/api"
 });
 //luu cookie ben server gui qua client
 instance.defaults.withCredentials = true;
