@@ -101,10 +101,13 @@ const Products = () => {
     if (sort) {
       queries.sort = sort;
     } else delete queries.sort;
-    navigate({
-      pathname: `/${category}`,
-      search: createSearchParams(queries).toString(),
-    });
+    // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
+    fetchProductsByCategory(queries);
+    // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
+    // navigate({
+    //   pathname: location.pathname,
+    //   search: createSearchParams(queries).toString(),
+    // });
   }, [sort]);
   return (
     <div className="w-full">
