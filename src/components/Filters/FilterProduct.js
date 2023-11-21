@@ -18,6 +18,8 @@ const FilterProduct = ({
   activeClick,
   changeFilter,
   type = "checkbox",
+  fetchProductsByCategory
+
 }) => {
   const [selected, setSelected] = useState([]);
   const { category } = useParams();
@@ -55,10 +57,13 @@ const FilterProduct = ({
       queries.color = selected.join(",");
       queries.page = 1;
     } else delete queries.color;
-    navigate({
-      pathname: `/${category}`,
-      search: createSearchParams(queries).toString(),
-    });
+    // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
+    fetchProductsByCategory(queries);
+    // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
+    // navigate({
+    //   pathname: location.pathname,
+    //   search: createSearchParams(queries).toString(),
+    // });
   }, [selected]);
 
   const debouncePriceFrom = useDebounce(price.from, 2000);
@@ -81,11 +86,13 @@ const FilterProduct = ({
     if (Number(price.to) > 0) {
       queries.to = price.to;
     } else delete queries.to;
-    queries.page = 1;
-    navigate({
-      pathname: `/${category}`,
-      search: createSearchParams(queries).toString(),
-    });
+   // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
+   fetchProductsByCategory(queries);
+   // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
+   // navigate({
+   //   pathname: location.pathname,
+   //   search: createSearchParams(queries).toString(),
+   // });
   }, [debouncePriceFrom, debouncePriceTo]);
 
   useEffect(() => {

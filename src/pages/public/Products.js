@@ -18,7 +18,6 @@ const Products = () => {
   const [params] = useSearchParams();
   const [sort, setSort] = useState("");
   const navigate = useNavigate();
-  console.log(category);
 
   const fetchProductsByCategory = async (queries) => {
     const response = await api.apiGetProducts(queries);
@@ -79,7 +78,7 @@ const Products = () => {
     const q = { ...queries, ...priceQuery };
     if (category.toLowerCase() === "all") {
       q.category = category;
-    } 
+    }
     // console.log(q);
     fetchProductsByCategory({
       ...q,
@@ -101,10 +100,13 @@ const Products = () => {
     if (sort) {
       queries.sort = sort;
     } else delete queries.sort;
-    navigate({
-      pathname: `/${category}`,
-      search: createSearchParams(queries).toString(),
-    });
+    // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
+    fetchProductsByCategory(queries);
+    // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
+    // navigate({
+    //   pathname: location.pathname,
+    //   search: createSearchParams(queries).toString(),
+    // });
   }, [sort]);
   return (
     <div className="w-full">
@@ -122,12 +124,14 @@ const Products = () => {
               name="price"
               activeClick={activeClick}
               changeFilter={changeFilter}
+              fetchProductsByCategory={fetchProductsByCategory}
               type="input"
             />
             <FilterProduct
               name="color"
               activeClick={activeClick}
               changeFilter={changeFilter}
+              fetchProductsByCategory={fetchProductsByCategory}
             />
           </div>
         </div>
