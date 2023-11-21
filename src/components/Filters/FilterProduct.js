@@ -51,7 +51,7 @@ const FilterProduct = ({
     for (let i of paramsList) {
       queries[i[0]] = i[1];
     }
-    //###############################
+    
     
     if (selected.length > 0) {
       queries.color = selected.join(",");
@@ -86,6 +86,7 @@ const FilterProduct = ({
     if (Number(price.to) > 0) {
       queries.to = price.to;
     } else delete queries.to;
+
    // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
    fetchProductsByCategory(queries);
    // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
@@ -93,6 +94,8 @@ const FilterProduct = ({
    //   pathname: location.pathname,
    //   search: createSearchParams(queries).toString(),
    // });
+
+
   }, [debouncePriceFrom, debouncePriceTo]);
 
   useEffect(() => {
