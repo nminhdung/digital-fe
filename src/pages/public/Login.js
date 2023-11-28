@@ -272,6 +272,11 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <div className="absolute md:right-1/2 left-[10%] right-0 top-[17%] w-[500px] bg-black p-3 text-red-500 font-semibold">
+        <h1>You can register (can't test admin's feature) or log in admin account </h1>
+        <h2>email: <span className="font-medium text-white">nminhdung112@gmail.com</span></h2>
+        <h3>password: <span className="font-medium text-white">123</span></h3>
+      </div>
     </div>
     //validate bằng formik : https://codesandbox.io/s/formik-v2-tutorial-final-ge1pt?file=/src/index.js:539-548
   );
