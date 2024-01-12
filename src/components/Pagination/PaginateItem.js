@@ -26,7 +26,7 @@ const PaginateItem = ({ children }) => {
 
     // ################################
     if (Number(children)) queries.page = children;
-    console.log(queries);
+    
     navigate({
       pathname: location.pathname,
       search: createSearchParams(queries).toString(),

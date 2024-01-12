@@ -81,7 +81,7 @@ const Products = () => {
     // console.log(q);
     fetchProductsByCategory({
       ...q,
-      limit: +process.env.REACT_APP_ITEM_PERPAGE,
+      limit: +process.env.REACT_APP_ITEM_PERPAGE || 6,
     });
     window.scrollTo(0, 0)
   }, [params, sort, category]);
