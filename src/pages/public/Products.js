@@ -5,7 +5,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { BreadCumbs, Product } from "../../components";
+import { BreadCumbs, Loading, Product } from "../../components";
 import { FilterProduct, SortProduct } from "../../components";
 import { Paginate } from "../../components";
 import * as api from "../../api";
@@ -13,18 +13,23 @@ import { sorts } from "../../utils/constants";
 
 const Products = () => {
   const { category } = useParams();
-  const [data, setData] = useState(null);
+  const [countProducts, setCountProduct] = useState(0);
   const [activeClick, setActiveClick] = useState("");
   const [params] = useSearchParams();
   const [sort, setSort] = useState("");
+  const [listProduct, setListProduct] = useState([])
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const fetchProductsByCategory = async (queries) => {
+    setLoading(true)
     if (category && category !== 'products') queries.category = category
     const response = await api.apiGetProducts(queries);
 
     if (response.success) {
-      setData(response);
+      setLoading(false)
+      setCountProduct(response.counts)
+      setListProduct(response.listProduct.slice(0, process.env.REACT_APP_ITEM_PERPAGE))
     }
   };
   const changeFilter = useCallback(
@@ -80,17 +85,17 @@ const Products = () => {
     console.log(paramsList);
 
     const q = { ...queries, ...priceQuery };
-    
+
 
     // console.log(q);
     fetchProductsByCategory({
       ...q,
       limit: +process.env.REACT_APP_ITEM_PERPAGE || 6,
-      page:+params.get("page") || 1
+      page: +params.get("page") || 1
     });
     window.scrollTo(0, 0)
   }, [params, sort, category]);
- 
+
   return (
     <div className="w-full">
       <div className="bg-gray-100 h-[81px] flex justify-center items-center">
@@ -123,16 +128,20 @@ const Products = () => {
           <SortProduct options={sorts} value={sort} changeValue={changeValue} />
         </div>
       </div>
-      <div className="xl:w-main mx-auto mt-8">
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-y-4 mx-[-10px]">
-          {data?.listProduct?.slice(0,6).map((item) => {
-            return <Product key={item._id} productData={item} normal={true} />;
-          })}
-          {data?.listProduct?.length === 0 && <h1>Products are coming soon...</h1>}
-        </div>
-      </div>
+      {loading ? <div className='flex items-center justify-center'><Loading /></div> :
+        (<div className="xl:w-main mx-auto mt-8">
+
+          <div className="grid md:grid-cols-4 grid-cols-2 gap-y-4 mx-[-10px]">
+
+            {listProduct && listProduct?.length > 0 && listProduct?.map((item) => {
+              return <Product key={item._id} productData={item} normal={true} />;
+            })}
+
+          </div>
+        </div>)}
+
       <div className="xl:w-main mx-auto mt-8 flex ">
-        <Paginate totalProduct={data?.counts} />
+        <Paginate totalProduct={countProducts} />
       </div>
       <div className="w-full h-[500px]"></div>
     </div>
