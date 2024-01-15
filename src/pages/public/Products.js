@@ -125,7 +125,7 @@ const Products = () => {
       </div>
       <div className="xl:w-main mx-auto mt-8">
         <div className="grid md:grid-cols-4 grid-cols-2 gap-y-4 mx-[-10px]">
-          {data?.listProduct?.map((item) => {
+          {data?.listProduct?.slice(0,6).map((item) => {
             return <Product key={item._id} productData={item} normal={true} />;
           })}
           {data?.listProduct?.length === 0 && <h1>Products are coming soon...</h1>}
