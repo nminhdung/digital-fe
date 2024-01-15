@@ -2,8 +2,8 @@ import axios from "axios";
 import { apiRefreshToken } from "./api";
 
 const instance = axios.create({
-  // baseURL: process.env.REACT_APP_API_URL,
-  baseURL:'http://localhost:7000/api'
+  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL:'http://localhost:7000/api'
 });
 //luu cookie ben server gui qua client
 instance.defaults.withCredentials = true;
