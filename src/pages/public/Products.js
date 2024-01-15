@@ -71,13 +71,17 @@ const Products = () => {
       }
     }
 
+    if (sort) {
+      queries.sort = sort;
+    } else delete queries.sort;
     delete queries.from;
     delete queries.to;
     console.log(queries);
     console.log(paramsList);
 
     const q = { ...queries, ...priceQuery };
-  
+    
+
     // console.log(q);
     fetchProductsByCategory({
       ...q,
@@ -86,28 +90,7 @@ const Products = () => {
     });
     window.scrollTo(0, 0)
   }, [params, sort, category]);
-  useEffect(() => {
-    const paramsList = [];
-    //giu lai cac truong filter truoc do
-    for (let i of params.entries()) {
-      paramsList.push(i);
-    }
-    const queries = {};
-    for (let i of paramsList) {
-      queries[i[0]] = i[1];
-    }
-    //###############################
-    if (sort) {
-      queries.sort = sort;
-    } else delete queries.sort;
-    // Nếu dùng fetch sau khi filter có thể fix được lỗi back về trang trước
-    fetchProductsByCategory(queries);
-    // Dùng navigate thì có thể tạo được nhứng field filter trên thanh search nhưng găp lỗi back về trang trước
-    // navigate({
-    //   pathname: location.pathname,
-    //   search: createSearchParams(queries).toString(),
-    // });
-  }, [sort]);
+ 
   return (
     <div className="w-full">
       <div className="bg-gray-100 h-[81px] flex justify-center items-center">
