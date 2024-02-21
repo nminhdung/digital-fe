@@ -19,13 +19,12 @@ const DealDaily = () => {
 
   const fetchDealDaily = async () => {
     const res = await api.apiGetProducts({
-      limit: 1,
-      page: Math.round(Math.random() * 10),
-      totalRatings: 5,
+      limit: 20,
+      sort:"-totalRatings"
     });
 
     if (res.success) {
-      setProductDealDaily(res.listProduct[0]);
+      setProductDealDaily(res.listProduct[Math.round(Math.random()*20)]);
       const today = `${moment().format("MM/DD/YYYY")} 7:00:00`;
       const seconds =
         new Date(today).getTime() - new Date().getTime() + 24 * 3600 * 1000;
@@ -41,29 +40,29 @@ const DealDaily = () => {
   };
 
   useEffect(() => {
-    idInterval && clearInterval(idInterval);
+    // idInterval && clearInterval(idInterval);
     fetchDealDaily();
   }, [expireTime]);
-  useEffect(() => {
-    idInterval = setInterval(() => {
-      if (second > 0) {
-        setSecond((prev) => prev - 1);
-      } else {
-        if (minute > 0) {
-          setMinute((prevMinute) => prevMinute - 1);
-          setSecond(59);
-        } else {
-          if (hour > 0) {
-            setHour((prevHour) => prevHour - 1);
-            setMinute(59);
-          } else {
-            setExpireTime(!expireTime);
-          }
-        }
-      }
-    }, 1000);
-    return () => clearInterval(idInterval);
-  }, [second, minute, hour, expireTime]);
+  // useEffect(() => {
+  //   idInterval = setInterval(() => {
+  //     if (second > 0) {
+  //       setSecond((prev) => prev - 1);
+  //     } else {
+  //       if (minute > 0) {
+  //         setMinute((prevMinute) => prevMinute - 1);
+  //         setSecond(59);
+  //       } else {
+  //         if (hour > 0) {
+  //           setHour((prevHour) => prevHour - 1);
+  //           setMinute(59);
+  //         } else {
+  //           setExpireTime(!expireTime);
+  //         }
+  //       }
+  //     }
+  //   }, 1000);
+  //   return () => clearInterval(idInterval);
+  // }, [second, minute, hour, expireTime]);
   return (
     <div className="w-full border flex-auto ">
       <div className="flex items-center justify-center p-4">
@@ -99,9 +98,9 @@ const DealDaily = () => {
       </div>
       <div className="mt-8 px-4">
         <div className="flex items-center justify-center gap-2 mb-4 ">
-          <CountDown unit="Hours" number={hour} />
+          {/* <CountDown unit="Hours" number={hour} />
           <CountDown unit="Minutes" number={minute} />
-          <CountDown unit="Seconds" number={second} />
+          <CountDown unit="Seconds" number={second} /> */}
         </div>
         <button
           className="flex items-center gap-2 justify-center w-full text-white font-medium py-2

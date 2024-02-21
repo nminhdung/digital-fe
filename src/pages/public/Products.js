@@ -20,6 +20,7 @@ const Products = () => {
   const navigate = useNavigate();
 
   const fetchProductsByCategory = async (queries) => {
+    if (category && category !== 'products') queries.category = category
     const response = await api.apiGetProducts(queries);
 
     if (response.success) {
@@ -76,13 +77,12 @@ const Products = () => {
     console.log(paramsList);
 
     const q = { ...queries, ...priceQuery };
-    if (category.toLowerCase() === "all") {
-      q.category = category;
-    }
+  
     // console.log(q);
     fetchProductsByCategory({
       ...q,
       limit: +process.env.REACT_APP_ITEM_PERPAGE,
+      page:+params.get("page") || 1
     });
     window.scrollTo(0, 0)
   }, [params, sort, category]);
