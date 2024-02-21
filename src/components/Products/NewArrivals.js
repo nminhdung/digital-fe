@@ -1,7 +1,7 @@
 import React from "react";
-import { CustomSlider } from "..";
-import Loading from "../Common/Loading"
-const NewArrivals = ({ products }) => {
+import {CustomSlider} from "..";
+
+const NewArrivals = ({products}) => {
   return (
     <div className="w-full ">
       <h3 className="font-semibold capitalize text-[20px] border-b-2 border-main cursor-pointer text-black">

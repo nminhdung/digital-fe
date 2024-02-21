@@ -1,7 +1,7 @@
 import React from "react";
-import { CircleLoader } from "react-spinners";
+import { FadeLoader} from "react-spinners";
 const Loading = () => {
-  return <CircleLoader color="#ee3a3a" />;
+  return <FadeLoader color="#ee3a3a" />;
 };
 
 export default Loading;

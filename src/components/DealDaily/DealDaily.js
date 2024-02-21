@@ -39,6 +39,7 @@ const DealDaily = () => {
     }
   };
 
+
   useEffect(() => {
     // idInterval && clearInterval(idInterval);
     fetchDealDaily();
