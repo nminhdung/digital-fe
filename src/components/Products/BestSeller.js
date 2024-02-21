@@ -4,7 +4,6 @@ import Loading from "../Common/Loading"
 import { Product, CustomSlider } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewProducts } from "../../store/products/asyncThunks";
-import Loading from "../Common/Loading"
 const tabs = [
   {
     id: 1,
