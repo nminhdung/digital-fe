@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import * as api from "../../api";
 import Loading from "../Common/Loading";
 import ProductCard from "./ProductCard";
-import Loading from "../Common/Loading"
 
 const FeatureProducts = () => {
   const [products, setProducts] = useState([]);
