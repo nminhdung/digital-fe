@@ -81,14 +81,15 @@ const Products = () => {
     delete queries.to;
     console.log(queries);
     console.log(paramsList);
-
-    const q = { ...queries, ...priceQuery };
+    
     if (category.toLowerCase() === "products") {
-      q.category = 'all';
+      queries.category = 'all';
     }
     else{
-      q.category=category;
+      queries.category=category;
     }
+    const q = { ...queries, ...priceQuery };
+   
     // console.log(q);
     fetchProductsByCategory({
       ...q,
