@@ -83,7 +83,7 @@ const Products = () => {
     console.log(paramsList);
 
     const q = { ...queries, ...priceQuery };
-    if (category.toLowerCase() === "all") {
+    if (category.toLowerCase() === "products") {
       q.category = 'all';
     }
     else{
