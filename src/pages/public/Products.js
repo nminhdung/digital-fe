@@ -22,6 +22,7 @@ const Products = () => {
   const navigate = useNavigate();
 
   const fetchProductsByCategory = async (queries) => {
+     if (category && category !== 'products') queries.category = category
     const response = await api.apiGetProducts(queries);
 
     if (response.success) {
@@ -84,9 +85,6 @@ const Products = () => {
     
     if (category.toLowerCase() === "products") {
       queries.category = 'all';
-    }
-    else{
-      queries.category=category;
     }
     const q = { ...queries, ...priceQuery };
    
