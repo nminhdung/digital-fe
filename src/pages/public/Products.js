@@ -84,7 +84,10 @@ const Products = () => {
 
     const q = { ...queries, ...priceQuery };
     if (category.toLowerCase() === "all") {
-      q.category = category;
+      q.category = 'all';
+    }
+    else{
+      q.category=category;
     }
     // console.log(q);
     fetchProductsByCategory({
