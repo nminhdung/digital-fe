@@ -14,6 +14,7 @@ const TopHeader = () => {
   const { isLoggedIn, current, mes,token } = useSelector((state) => state.user);
 
   const handleLogout = async () => {
+    // Lỗi ko thể lấy refresh token từ cookies trên googlechrome trên firefox vẫn lấy được , (do khác domain fe và server lúc deploy)
     const res = await apiLogout();
     if (res.success) {
       toast.success(res.mes);

@@ -185,7 +185,7 @@ const Login = () => {
         alt="background"
         className="w-full h-full object-cover"
       />
-      <div className="absolute top-0 bottom-0  left-[10%]  md:right-1/2 right-0 flex items-center ">
+      <div className="absolute top-[50%] bottom-0  left-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center ">
         <div className="p-8 bg-white rounded-md md:min-w-[500px]  min-w-[200px] flex flex-col items-center">
           <h1 className="text-[28px] font-semibold  text-main mb-8 ">
             {isRegister ? "Register" : "Login"}
@@ -273,7 +273,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <div className="absolute md:right-1/2 left-[10%] right-0 top-[17%] w-[500px] bg-black p-3 text-red-500 font-semibold">
+      <div className="absolute  left-[50%] right-0 top-[20%] translate-x-[-50%] translate-y-[-50%] max-w-[500px] bg-black p-3 text-red-500 font-semibold">
         <h1>You can register (can't test admin's feature) or log in admin account </h1>
         <h2>email: <span className="font-medium text-white">nminhdung112@gmail.com</span></h2>
         <h3>password: <span className="font-medium text-white">123</span></h3>
